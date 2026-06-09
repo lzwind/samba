@@ -1,3 +1,25 @@
+samba (2:4.19.5+dfsg-1deepin6) unstable; urgency=high
+
+  * Fix CVE-2026-3012: group policy certificate enrollment uses http://
+    without validation. Remove HTTP-based CA certificate fetch, use LDAP.
+  * Fix CVE-2026-3238: WINS server NULL pointer dereference via crafted
+    network packets. Validate incoming packets before dereferencing.
+  * Fix CVE-2026-4408: Unauthenticated remote code execution in SAMR
+    via unescaped %%u substitution in check password script.
+  * Fix CVE-2026-4480: Unauthenticated remote code execution in printing
+    subsystem via unescaped %%J substitution in print command.
+  * Not affected: CVE-2026-1933 (vulnerable code in >= 4.21, we have 4.19)
+  * Not affected: CVE-2026-2340 (vulnerable code in >= 4.20, we have 4.19)
+
+ -- deepin-ci-robot <packages@deepin.org>  Mon, 09 Jun 2026 10:30:00 +0800
+
+samba (2:4.19.5+dfsg-1deepin6) unstable; urgency=high
+
+  * Fix CVE-2026-3012: group policy certificate enrollment uses http://
+    without validation. Remove HTTP-based CA certificate fetch, use LDAP.
+
+ -- deepin-ci-robot <packages@deepin.org>  Mon, 09 Jun 2026 10:30:00 +0800
+
 samba (2:4.19.5+dfsg-1deepin5) unstable; urgency=high
 
   * Fix CVE-2025-10230: WINS hook shell command injection vulnerability
