@@ -479,7 +479,6 @@ Depends: samba-common,
          ${misc:Depends},
          ${shlibs:Depends}
 Enhances:
-         libkrb5-26t64-heimdal <!pkg.samba.mitkrb5 !pkg.samba.before-trixie>,
          libkrb5-26-heimdal    <!pkg.samba.mitkrb5  pkg.samba.before-trixie>,
 Suggests: libnss-winbind, libpam-winbind
 # 4.16.6+dfsg-5 idmap_{script,rfc2307}.8 moved samba{,-libs} => winbind
@@ -721,27 +720,6 @@ Description: hierarchical pool based memory allocator - Python3 bindings
  This package contains the Python 3 bindings.
 
 ###################### tevent packages
-Package: libtevent0t64
-Build-Profiles: <!pkg.samba.before-trixie>
-# ${t64:Provides}:
-Provides: libtevent0 (= ${binary:Version}) [amd64 arm64 i386 mips64el ppc64el riscv64 s390x]
-Replaces: libtevent0
-Breaks: libtevent0 (<< ${binary:Version}~)
-Architecture: any
-Multi-Arch: same
-Pre-Depends: ${misc:Pre-Depends}
-Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Description: talloc-based event loop library - shared library
- tevent is a simple library that can handle the main event loop for an
- application. It supports three kinds of events: timed events, file
- descriptors becoming readable or writable and signals.
- .
- Talloc is used for memory management, both internally and for private
- data provided by users of the library.
- .
- This package provides the shared library file.
-
 Package: libtevent0
 # the same as libtevent0t64
 Build-Profiles: <pkg.samba.before-trixie>
@@ -766,7 +744,6 @@ Architecture: any
 Multi-Arch: same
 Depends: libc6-dev,
          libtalloc-dev,
-         libtevent0t64 (= ${binary:Version}) <!pkg.samba.before-trixie>,
          libtevent0    (= ${binary:Version}) < pkg.samba.before-trixie>,
          ${misc:Depends}
 Description: talloc-based event loop library - development files

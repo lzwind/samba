@@ -1,1 +1,1 @@
-libtevent0t64.install
+usr/lib/${DEB_HOST_MULTIARCH}/libtevent.so.0*
