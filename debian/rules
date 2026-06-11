@@ -70,7 +70,7 @@ talloc-packages := libtalloc2 libtalloc-dev python3-talloc
 # lib/tevent/wscript
 tevent-upstream-version := 0.16.2
 tevent-version = 2:${tevent-upstream-version}${subver-suffix}
-libtevent := $(if ${before-trixie},libtevent0,libtevent0t64)
+libtevent := $(if ${before-trixie},libtevent0)
 tevent-packages := ${libtevent} libtevent-dev
 
 # lib/tdb/wscript
