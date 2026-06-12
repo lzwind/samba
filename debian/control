@@ -13,7 +13,7 @@ Build-Depends:
 Build-Depends-Arch:
 	dh-sequence-python3,
         python3-setuptools,
-	dpkg-dev (>= 1.22.5) <!pkg.samba.before-trixie>,
+	dpkg-dev (>= 1.22.5),
 # tools:
 	bison,
 	docbook-xml, docbook-xsl, xsltproc,
@@ -21,7 +21,7 @@ Build-Depends-Arch:
 	perl:any,
 # :native for bookworm, on trixie and up it is not needed
 	libparse-yapp-perl:native | libparse-yapp-perl,
-	rpcsvc-proto  <!pkg.samba.before-trixie>,
+	rpcsvc-proto,
 # for winexe. gcc-mingw-w64 brings 4 toolchains, we need only 2
         gcc-mingw-w64-i686-win32, gcc-mingw-w64-x86-64-win32,
 # system libraries:
@@ -428,20 +428,6 @@ Package: libsmbclient0
 Provides: libsmbclient (= ${binary:Version}) [amd64 arm64 i386 mips64el ppc64el riscv64 s390x]
 Replaces: libsmbclient
 Breaks: libsmbclient (<< ${source:Version})
-Build-Profiles: <!pkg.samba.before-trixie>
-Section: libs
-Architecture: any
-Multi-Arch: same
-Pre-Depends: ${misc:Pre-Depends}
-Depends: samba-libs (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
-Description: shared library for communication with SMB/CIFS servers
- This package provides a shared library that enables client applications
- to talk to Microsoft Windows and Samba servers using the SMB/CIFS
- protocol.
-
-Package: libsmbclient
-# exactly the same as libsmbclient but for older systems before t64 transition
-Build-Profiles: <pkg.samba.before-trixie>
 Section: libs
 Architecture: any
 Multi-Arch: same
@@ -457,8 +443,7 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends},
- libsmbclient0 (= ${binary:Version}) <!pkg.samba.before-trixie>,
- libsmbclient  (= ${binary:Version}) < pkg.samba.before-trixie>,
+ libsmbclient0 (= ${binary:Version}),
 # the library name is libsmbclient0 on trixie and up
 Description: development files for libsmbclient
  This package provides the development files (static library and headers)
@@ -722,7 +707,6 @@ Description: hierarchical pool based memory allocator - Python3 bindings
 ###################### tevent packages
 Package: libtevent0
 # the same as libtevent0t64
-Build-Profiles: <pkg.samba.before-trixie>
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
@@ -744,7 +728,7 @@ Architecture: any
 Multi-Arch: same
 Depends: libc6-dev,
          libtalloc-dev,
-         libtevent0    (= ${binary:Version}) < pkg.samba.before-trixie>,
+         libtevent0    (= ${binary:Version}),
          ${misc:Depends}
 Description: talloc-based event loop library - development files
  tevent is a simple library that can handle the main event loop for an
