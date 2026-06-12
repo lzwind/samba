@@ -53,8 +53,6 @@ endif
 
 DESTDIR = ${CURDIR}/debian/tmp
 
-before-trixie := $(filter pkg.samba.before-trixie, ${DEB_BUILD_PROFILES})
-
 subver-suffix := +samba${DEB_VERSION_UPSTREAM_REVISION}
 
 # lib/ldb/wscript
@@ -70,7 +68,7 @@ talloc-packages := libtalloc2 libtalloc-dev python3-talloc
 # lib/tevent/wscript
 tevent-upstream-version := 0.16.2
 tevent-version = 2:${tevent-upstream-version}${subver-suffix}
-libtevent := $(if ${before-trixie},libtevent0)
+libtevent := libtevent0
 tevent-packages := ${libtevent} libtevent-dev
 
 # lib/tdb/wscript
@@ -144,7 +142,7 @@ omit-pkgs += ctdb libpam-winbind samba samba-ad-dc samba-testsuite samba-vfs-mod
 endif
 
 # we had t64 transition (libsmbclient => libsmbclient0) for trixie
-libsmbclient := $(if ${before-trixie},libsmbclient,libsmbclient0)
+libsmbclient := libsmbclient0
 
 mitkrb5-dep-pkgs :=
 ifneq (,$(filter pkg.samba.mitkrb5, ${DEB_BUILD_PROFILES}))
@@ -431,10 +429,8 @@ ifneq (,$(filter ${build-pkgs}, ${mitkrb5-dep-pkgs}))
 	dh_gencontrol $(addprefix -p, $(filter ${build-pkgs}, ${mitkrb5-dep-pkgs})) -- -v${mitkrb5-samba-ver} ${extra-version-vars}
 endif
 	dh_gencontrol --remaining-packages -- ${extra-version-vars}
-ifeq (,${before-trixie})
 # run dh_movetousr only on trixie and up, not before
 	dh_movetousr -plibpam-winbind -plibnss-winbind
-endif
 
 # check-subpkg-ver name,variable-in-wscript
 define check-subpkg-ver
